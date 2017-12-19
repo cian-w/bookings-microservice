@@ -23,6 +23,34 @@ app.post('/book', function (req, res) {
     });
 });
 
+// Route used when deleting a booking
+app.post('/delete', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    // Parse the request body
+    var id = JSON.parse(Object.keys(req.body)[0]);
+
+    data.deleteBooking(id, function (result) {
+        res.send(result);
+    });
+});
+
+app.get('/bookings', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    data.getUserBookings(function (result) {
+        res.send(result);
+    });
+});
+
+app.get('/allbookings', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    data.getAllBookings(function (result) {
+        res.send(result);
+    });
+});
+
 
 app.get('/grass', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");

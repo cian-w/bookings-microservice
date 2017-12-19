@@ -20,6 +20,38 @@ module.exports = {
           if(err) throw err;
           callback(result);
       });
+  },
+
+  // Get user's list of bookings
+  getUserBookings: function (callback){
+      var query = 'SELECT * FROM Bookings WHERE UserId = 2';
+
+      db.query(query, function (err,result){
+          if(err) throw err;
+          callback(result);
+      });
+  },
+
+  // Get all bookings in DB
+  getAllBookings: function (callback){
+      var query = 'SELECT * FROM Bookings';
+
+      db.query(query, function (err,result){
+          if(err) throw err;
+          callback(result);
+      });
+  },
+
+  // Delete a booking
+  deleteBooking: function (booking, callback){
+      var id = booking.id;
+      
+      var query = 'DELETE FROM Bookings WHERE ID = "' + id + '"';
+
+      db.query(query, function (err,result){
+          if(err) throw err;
+          callback(result);
+      });
   }
 
 };
