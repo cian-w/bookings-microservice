@@ -45,13 +45,33 @@ module.exports = {
   // Delete a booking
   deleteBooking: function (booking, callback){
       var id = booking.id;
-      
+
       var query = 'DELETE FROM Bookings WHERE ID = "' + id + '"';
 
       db.query(query, function (err,result){
           if(err) throw err;
           callback(result);
       });
-  }
+  },
+
+  // Get bookings for astroturf Pitch
+  getAstroBookings: function (callback){
+      var query = 'SELECT * FROM Bookings WHERE Pitch = "Astro"';
+
+      db.query(query, function (err,result){
+          if(err) throw err;
+          callback(result);
+      });
+  },
+
+  // Get bookings for grass Pitch
+  getGrassBookings: function (callback){
+      var query = 'SELECT * FROM Bookings WHERE Pitch = "Grass"';
+
+      db.query(query, function (err,result){
+          if(err) throw err;
+          callback(result);
+      });
+  },
 
 };
