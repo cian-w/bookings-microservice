@@ -79,6 +79,7 @@ app.post('/delete', function (req, res) {
     });
 });
 
+// Route for getting user's bookings
 app.get('/bookings', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
 
@@ -87,6 +88,7 @@ app.get('/bookings', function (req, res) {
     });
 });
 
+// Route to get all bookings in DB
 app.get('/allbookings', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
 
@@ -95,7 +97,7 @@ app.get('/allbookings', function (req, res) {
     });
 });
 
-
+// Route to get bookings for grass pitch
 app.get('/grass', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
 
@@ -104,6 +106,7 @@ app.get('/grass', function (req, res) {
     });
 });
 
+// Route to get bookings for astro pitch
 app.get('/astro', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
 
