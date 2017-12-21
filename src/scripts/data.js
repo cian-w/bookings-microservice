@@ -42,6 +42,16 @@ module.exports = {
       });
   },
 
+  // Search table for a given string
+  searchData: function (searchTerm, callback) {
+     var query = 'SELECT * FROM Bookings WHERE Title LIKE "' + searchTerm + '%" LIMIT 100;';
+
+     db.query(query, function (err,result){
+         if(err) throw err;
+         callback(result);
+     });
+  },
+
   // Delete a booking
   deleteBooking: function (booking, callback){
       var id = booking.id;

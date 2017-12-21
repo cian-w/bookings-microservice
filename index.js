@@ -35,7 +35,6 @@ app.post('/charge', function (req, res) {
     // Get token generate by Stripe
     var token = JSON.parse(Object.keys(req.body)[0]);
     token = token.id;
-    console.log(token);
 
     // Create the charge object with data from the Vue.js client
     var newCharge = {
@@ -54,6 +53,17 @@ app.post('/charge', function (req, res) {
             // send response with charge data
             res.json({ error: false, charge: charge });
         }
+    });
+});
+
+// Route for searching bookings
+app.get('/search/:searchTerm', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    var searchTerm = req.params.searchTerm;
+
+    data.searchData(searchTerm, function (result) {
+        res.send(result);
     });
 });
 
