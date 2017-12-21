@@ -5,6 +5,10 @@ var http        = require('http');
 var request     = require('request');
 var bodyParser  = require('body-parser');
 
+// Configure our Stripe secret key and object
+var stripe = require('stripe')('');
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
@@ -20,6 +24,36 @@ app.post('/book', function (req, res) {
     // Check with database for user credentials
     data.insertBooking(bookingDetails, function (result) {
         res.send(result);
+    });
+});
+
+// STRIPE - Route used to charge credit card after receiving token
+// from Stripe API
+app.post('/charge', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    // Get token generate by Stripe
+    var token = JSON.parse(Object.keys(req.body)[0]);
+    token = token.id;
+    console.log(token);
+
+    // Create the charge object with data from the Vue.js client
+    var newCharge = {
+        amount: 4500,
+        currency: "eur",
+        source: token,
+        description: 'Pitch Booking',
+    };
+    // Call the stripe objects helper functions to trigger a new charge
+    stripe.charges.create(newCharge, function(err, charge) {
+        // send response
+        if (err){
+            console.error(err);
+            res.json({ error: err, charge: false });
+        } else {
+            // send response with charge data
+            res.json({ error: false, charge: charge });
+        }
     });
 });
 
