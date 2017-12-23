@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var db = mysql.createConnection({
-    host     : '127.0.0.1',
+    host     : '172.17.0.2',
     user     : 'root',
-    password : '',
-    database : 'booking_app'
+    password : 'dbpass',
+    database : 'booking_app',
 });
 
 db.connect(function(err) {
